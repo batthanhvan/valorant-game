@@ -1,0 +1,34 @@
+syntax="proto3";
+
+option go_package = "./pb";
+
+package person;
+
+message Pagination {
+    int32 offset = 1;
+    int32 limit = 2;
+    int64 total = 3;
+}
+
+message PlayerGetRequest{
+    string limit = 1;
+    string offset = 2;
+    string query = 3;
+}
+
+message PlayerGetResponse {
+    int32 code = 1;
+    bool success = 2;
+    Data data = 3;
+    message Data {
+        repeated Player result = 1;
+        Pagination pagination  = 2;
+    }
+}
+
+message Player {
+    string userName = 1;
+    string reportCategory = 2;
+    string reportDetail = 3;
+    // int64 reportDate = 4;
+}
