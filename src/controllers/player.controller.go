@@ -11,7 +11,7 @@ func HandleGetByUserName(g *gin.Context) {
 	req := pb.PlayerGetRequest{
 		Query:  g.DefaultQuery("query", "%"),
 		Limit:  g.DefaultQuery("limit", "5"),
-		Offset: g.DefaultQuery("offset", "0"),
+		Offset: g.DefaultQuery("offset", "1"),
 	}
 
 	res, err := service.GetByUserName(&req)

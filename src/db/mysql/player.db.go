@@ -17,7 +17,8 @@ func TotalPlayer(search *db.Search) (*int64, error) {
 	}
 	defer db.Close()
 
-	total := db.QueryRow("select count(username) from players WHERE players.username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
+	search.Query = "%" + search.Query + "%"
+	total := db.QueryRow("SELECT count(sub.username) FROM (SELECT players.username,reports.reportCategory,reports.reportDetail FROM players LEFT JOIN reports ON players.username = reports.username WHERE players.username like ? LIMIT ?,?) as sub", search.Query, search.Skip, search.Limit)
 
 	var r int64
 	err = total.Scan(&r)
@@ -36,6 +37,7 @@ func ListPlayers(search *db.Search) ([]*pb.Player, error) {
 	}
 	defer db.Close()
 
+	search.Query = "%" + search.Query + "%"
 	results, err := db.Query("SELECT players.username,reports.reportCategory,reports.reportDetail FROM players LEFT JOIN reports ON players.username = reports.username WHERE players.username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
 
 	if err != nil {
