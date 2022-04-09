@@ -1,8 +1,19 @@
-syntax="proto3";
 
+syntax="proto3";
+package proto;
 option go_package = "./pb";
 
-package person;
+
+
+
+// service ApiService {
+//     rpc PlayerGet(PlayerGetRequest) returns (PlayerGetResponse) {
+//         option (google.api.http) = {
+//             get: "/player/search"
+//         };
+//     }
+// }
+
 
 message Pagination {
     int32 offset = 1;
