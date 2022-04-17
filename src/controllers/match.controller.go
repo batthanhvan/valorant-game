@@ -7,14 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HandleGetByUserName(g *gin.Context) {
+func HandleGetByMatchID(g *gin.Context) {
 	req := pb.GetRequest{
 		Query:  g.DefaultQuery("query", "%"),
 		Limit:  g.DefaultQuery("limit", "20"),
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
-	res, err := service.GetByUserName(&req)
+	res, err := service.GetByMatchID(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return

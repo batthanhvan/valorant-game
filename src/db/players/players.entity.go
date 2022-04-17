@@ -1,11 +1,13 @@
 package players
 
+import "database/sql"
+
 type Player struct {
-	UserName       string `gorm:"type:varchar(32)"`
-	PlayerName     string `gorm:"type:varchar(32)"`
-	PlayerTagline  int64  `gorm:"type:bigint"`
-	PlayerRank     string `gorm:"type:varchar(32)"`
-	PlayerStatus   string `gorm:"type:varchar(32)"`
-	ReportCategory string `gorm:"-:migration;->"`
-	ReportDetail   string `gorm:"-:migration;->"`
+	UserName       sql.NullString `gorm:"type:varchar(16)"`
+	PlayerName     sql.NullString `gorm:"type:varchar(16)"`
+	PlayerTagline  int64          `gorm:"type:bigint"`
+	PlayerRank     sql.NullString `gorm:"type:varchar(13)"`
+	PlayerStatus   sql.NullString `gorm:"type:varchar(18)"`
+	ReportCategory sql.NullString `gorm:"-:migration;->"`
+	ReportDetail   sql.NullString `gorm:"-:migration;->"`
 }

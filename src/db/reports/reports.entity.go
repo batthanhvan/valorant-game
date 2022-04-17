@@ -1,8 +1,10 @@
 package reports
 
-type Player struct {
-	ReportCategory string `gorm:"type:varchar(32)"`
-	ReportDetail   string `gorm:"type:varchar(64)"`
-	MatchId        string `gorm:"type:varchar(32)"`
-	UserName       string `gorm:"type:varchar(32)"`
+import "database/sql"
+
+type Report struct {
+	ReportCategory sql.NullString `gorm:"type:varchar(40)"`
+	ReportDetail   sql.NullString `gorm:"type:varchar(100)"`
+	MatchId        sql.NullString `gorm:"type:varchar(12)"`
+	UserName       sql.NullString `gorm:"type:varchar(16)"`
 }

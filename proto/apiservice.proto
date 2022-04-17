@@ -21,10 +21,20 @@ message Pagination {
     int64 total = 3;
 }
 
-message PlayerGetRequest{
+message GetRequest{
     string limit = 1;
     string offset = 2;
     string query = 3;
+}
+
+message ReportGetResponse {
+    int32 code = 1;
+    bool success = 2;
+    Data data = 3;
+    message Data {
+        repeated Report result = 1;
+        Pagination pagination  = 2;
+    }
 }
 
 message PlayerGetResponse {
@@ -37,9 +47,41 @@ message PlayerGetResponse {
     }
 }
 
+message MatchGetResponse {
+    int32 code = 1;
+    bool success = 2;
+    Data data = 3;
+    message Data {
+        repeated Match result = 1;
+        Pagination pagination  = 2;
+    }
+}
+
+message Report {
+    string reportCategory = 1;
+    string reportDetail = 2;
+    string matchId = 3;
+    string userName = 4;
+}
+
 message Player {
     string userName = 1;
-    string reportCategory = 2;
-    string reportDetail = 3;
-    // int64 reportDate = 4;
+    string PlayerName = 2;
+    int64 PlayerTagline = 3;
+    string PlayerRank = 4;
+    string PlayerStatus = 5;
+    string reportCategory = 6;
+    string reportDetail = 7;
+}
+
+message Match {
+    string matchID = 1;
+    string matchServer = 2;
+    string startTime = 3;
+    string endTime = 4;
+    string recordLink = 5;
+    string mapName = 6;
+    string modeName = 7;
+    string userName = 8;
+    string agent = 9;
 }
