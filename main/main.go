@@ -7,7 +7,16 @@ import (
 
 func main() {
 	r := gin.Default()
-	playerGroup := r.Group("/player")
+
+	reportGroup := r.Group("/reports")
+	reportGroup.GET("/show", controllers.HandleShowAllReports)
+	reportGroup.GET("/search", controllers.HandleGetReportByUsername)
+
+	playerGroup := r.Group("/players")
 	playerGroup.GET("/search", controllers.HandleGetByUserName)
+
+	matchGroup := r.Group("/matches")
+	matchGroup.GET("/search", controllers.HandleGetByMatchID)
+
 	r.Run("localhost:8080")
 }

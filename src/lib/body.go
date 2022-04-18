@@ -19,11 +19,10 @@ import (
 	// "github.com/gin-gonic/gin"
 	// "github.com/google/uuid"
 	// "go.opentelemetry.io/otel/codes"
+	pb "github.com/batthanhvan/proto/pb"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
-
 	// "golang.org/x/xerrors"
-	"github.com/batthanhvan/proto/pb"
 )
 
 // func SetBody(c *gin.Context) error {

@@ -3,13 +3,13 @@ package mysql
 import (
 	"database/sql"
 
-	"github.com/batthanhvan/proto/pb"
+	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
 	"github.com/batthanhvan/src/db/players"
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func TotalPlayer(search *db.Search) (*int64, error) {
+func PlayerCount(search *db.Search) (*int64, error) {
 
 	db, err := sql.Open("mysql", db.ConStr)
 	if err != nil {
@@ -44,21 +44,21 @@ func ListPlayers(search *db.Search) ([]*pb.Player, error) {
 		panic(err.Error())
 	}
 
-	var r players.Player
+	var player players.Player
 	rr := make([]players.Player, 0)
 	for results.Next() {
 
-		err = results.Scan(&r.UserName, &r.ReportCategory, &r.ReportDetail)
+		err = results.Scan(&player.UserName, &player.ReportCategory, &player.ReportDetail)
 
 		if err != nil {
 			panic(err.Error())
 		}
-		rr = append(rr, r)
+		rr = append(rr, player)
 	}
 
 	arr := make([]*pb.Player, 0)
-	for _, v := range rr {
-		arr = append(arr, ConvertPlayerToProto(v))
+	for _, player := range rr {
+		arr = append(arr, ConvertPlayerToProto(player))
 	}
 	return arr, nil
 
@@ -67,9 +67,9 @@ func ListPlayers(search *db.Search) ([]*pb.Player, error) {
 func ConvertPlayerToProto(p players.Player) *pb.Player {
 	ppb := &pb.Player{}
 
-	ppb.UserName = p.UserName
-	ppb.ReportCategory = p.ReportCategory
-	ppb.ReportDetail = p.ReportDetail
+	ppb.UserName = p.UserName.String
+	ppb.ReportCategory = p.ReportCategory.String
+	ppb.ReportDetail = p.ReportDetail.String
 
 	return ppb
 }
