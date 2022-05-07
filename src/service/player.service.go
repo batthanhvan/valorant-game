@@ -23,7 +23,7 @@ func GetByUserName(req *pb.GetRequest) (*pb.PlayerGetResponse_Data, error) {
 		return nil, err
 	}
 
-	res, err := mysql.ListPlayers(&db.Search{
+	res, err := mysql.SearchPlayer(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,

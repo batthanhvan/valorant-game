@@ -13,7 +13,7 @@ func main() {
 	reportGroup.GET("/search", controllers.HandleGetReportByUsername)
 
 	playerGroup := r.Group("/players")
-	playerGroup.GET("/search", controllers.HandleGetByUserName)
+	playerGroup.GET("/detail", controllers.HandleGetByUserName)
 
 	matchGroup := r.Group("/matches")
 	matchGroup.GET("/search", controllers.HandleGetByMatchID)
