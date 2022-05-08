@@ -42,8 +42,8 @@ message PlayerGetResponse {
     bool success = 2;
     Data data = 3;
     message Data {
-        repeated Player result = 1;
-        Pagination pagination  = 2;
+        Player result = 1;
+        // Pagination pagination  = 2;
     }
 }
 
@@ -66,18 +66,19 @@ message Report {
 }
 
 message Player {
-    string playerName = 1;
-    int32 playerTagline = 2;
-    string playerRank = 3;
-    string playerStatus = 4;
-    int32 wins = 5;
-    int32 kills = 6;
-    int32 assists = 7;
-    float killsPerRound = 8;
-    int32 firstBloods = 9;
-    int32 aces = 10;
-    int32 clutches = 11;
-    int32 mostKills = 12;
+    string username = 1;
+    string playerName = 2;
+    int32 playerTagline = 3;
+    string playerRank = 4;
+    string playerStatus = 5;
+    int32 wins = 6;
+    int32 kills = 7;
+    int32 assists = 8;
+    float killsPerRound = 9;
+    int32 firstBloods = 10;
+    int32 aces = 11;
+    int32 clutches = 12;
+    int32 mostKills = 13;
 }
 
 message Match {

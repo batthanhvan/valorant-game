@@ -2,6 +2,7 @@ package players
 
 var QueryString string = `
 SELECT 
+    p.username,
     p.playerName,
     p.playerTagline,
     p.playerRank,
@@ -27,27 +28,27 @@ FROM
     (SELECT 
         rs.username,
             r.kills,
-            SUM(assistCount) assists,
+            r.assists,
             r.kills / r.roundCount killPerRound,
-            SUM(firstBlood) firstbloods,
-            rAce.aces aces,
-            SUM(clutch) clutches,
+            r.firstbloods,
+            r.aces,
+            r.clutches,
             MAX(rmostkill.killPerMatch) mostkill
     FROM
         rounds rs
     JOIN (SELECT 
-        SUM(killCount) kills, COUNT(*) roundCount, username
-    FROM
-        rounds
-    GROUP BY username) r ON rs.username = r.username
-    JOIN (SELECT 
-        COUNT(CASE
+        SUM(killCount) kills,
+            SUM(assistCount) assists,
+            COUNT(*) roundCount,
+            SUM(firstBlood) firstbloods,
+            COUNT(CASE
                 WHEN killCount = 5 THEN 1
             END) aces,
+            SUM(clutch) clutches,
             username
     FROM
         rounds
-    GROUP BY username) rAce ON rs.username = rAce.username
+    GROUP BY username) r ON rs.username = r.username
     JOIN (SELECT 
         SUM(killCount) killPerMatch, username
     FROM

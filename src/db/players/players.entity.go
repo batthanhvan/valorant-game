@@ -3,6 +3,7 @@ package players
 import "database/sql"
 
 type Player struct {
+	UserName      sql.NullString `gorm:"type:varchar(16)"`
 	PlayerName    sql.NullString `gorm:"type:varchar(16)"`
 	PlayerTagline int32          `gorm:"type:bigint"`
 	PlayerRank    sql.NullString `gorm:"type:varchar(13)"`

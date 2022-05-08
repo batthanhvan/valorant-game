@@ -17,7 +17,7 @@ func MatchCount(search *db.Search) (*int64, error) {
 	}
 	defer db.Close()
 
-	search.Query = "%" + search.Query + "%"
+	// search.Query = "%" + search.Query + "%"
 	total := db.QueryRow("select count(*) from playerinmatch WHERE username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
 
 	var r int64
@@ -37,7 +37,7 @@ func ListMatches(search *db.Search) ([]*pb.Match, error) {
 	}
 	defer db.Close()
 
-	search.Query = "%" + search.Query + "%"
+	// search.Query = "%" + search.Query + "%"
 	results, err := db.Query(matches.QueryString, search.Query, search.Skip, search.Limit)
 
 	if err != nil {
