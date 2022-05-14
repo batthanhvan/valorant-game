@@ -17,7 +17,8 @@ func ReportCount(search *db.Search) (*int64, error) {
 	}
 	defer db.Close()
 
-	total := db.QueryRow("select count(*) from reports WHERE reports.username like ? LIMIT ?,?", "%"+search.Query+"%", search.Skip, search.Limit)
+	search.Query = "%" + search.Query + "%"
+	total := db.QueryRow("select count(*) from reports WHERE reports.username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
 
 	var r int64
 	err = total.Scan(&r)
@@ -36,7 +37,7 @@ func AllReport(search *db.Search) ([]*pb.Report, error) {
 	}
 	defer db.Close()
 
-	results, err := db.Query("select * from reports LIMIT ?,?", search.Skip, search.Limit)
+	results, err := db.Query(reports.QueryAllString, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())
@@ -46,7 +47,7 @@ func AllReport(search *db.Search) ([]*pb.Report, error) {
 	rr := make([]reports.Report, 0)
 	for results.Next() {
 
-		err = results.Scan(&report.ReportCategory, &report.ReportDetail, &report.MatchId, &report.UserName)
+		err = results.Scan(&report.ReportCategory, &report.ReportDetail, &report.ReportDate, &report.RecordLink, &report.UserName)
 
 		if err != nil {
 			panic(err.Error())
@@ -69,7 +70,8 @@ func ListReports(search *db.Search) ([]*pb.Report, error) {
 	}
 	defer db.Close()
 
-	results, err := db.Query("SELECT * FROM reports WHERE reports.username like ? LIMIT ?,?", "%"+search.Query+"%", search.Skip, search.Limit)
+	search.Query = "%" + search.Query + "%"
+	results, err := db.Query(reports.QueryString, search.Query, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())
@@ -79,7 +81,7 @@ func ListReports(search *db.Search) ([]*pb.Report, error) {
 	rr := make([]reports.Report, 0)
 	for results.Next() {
 
-		err = results.Scan(&report.ReportCategory, &report.ReportDetail, &report.MatchId, &report.UserName)
+		err = results.Scan(&report.ReportCategory, &report.ReportDetail, &report.ReportDate, &report.RecordLink, &report.UserName)
 
 		if err != nil {
 			panic(err.Error())
@@ -100,7 +102,8 @@ func ConvertReportToProto(p reports.Report) *pb.Report {
 
 	ppb.ReportCategory = p.ReportCategory.String
 	ppb.ReportDetail = p.ReportDetail.String
-	ppb.MatchId = p.MatchId.String
+	ppb.ReportDate = p.ReportDate.String
+	ppb.RecordLink = p.RecordLink.String
 	ppb.UserName = p.UserName.String
 
 	return ppb

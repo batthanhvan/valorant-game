@@ -4,8 +4,6 @@ package proto;
 option go_package = "./pb";
 
 
-
-
 // service ApiService {
 //     rpc PlayerGet(PlayerGetRequest) returns (PlayerGetResponse) {
 //         option (google.api.http) = {
@@ -13,7 +11,6 @@ option go_package = "./pb";
 //         };
 //     }
 // }
-
 
 message Pagination {
     int32 offset = 1;
@@ -26,6 +23,9 @@ message GetRequest{
     string offset = 2;
     string query = 3;
 }
+
+
+
 
 message ReportGetResponse {
     int32 code = 1;
@@ -42,8 +42,8 @@ message PlayerGetResponse {
     bool success = 2;
     Data data = 3;
     message Data {
-        repeated Player result = 1;
-        Pagination pagination  = 2;
+        Player result = 1;
+        // Pagination pagination  = 2;
     }
 }
 
@@ -60,28 +60,33 @@ message MatchGetResponse {
 message Report {
     string reportCategory = 1;
     string reportDetail = 2;
-    string matchId = 3;
-    string userName = 4;
+    string reportDate = 3;
+    string recordLink = 4;
+    string userName = 5;
 }
 
 message Player {
-    string userName = 1;
-    string PlayerName = 2;
-    int64 PlayerTagline = 3;
-    string PlayerRank = 4;
-    string PlayerStatus = 5;
-    string reportCategory = 6;
-    string reportDetail = 7;
+    string username = 1;
+    string playerName = 2;
+    int32 playerTagline = 3;
+    string playerRank = 4;
+    string playerStatus = 5;
+    int32 wins = 6;
+    int32 kills = 7;
+    int32 assists = 8;
+    float killsPerRound = 9;
+    int32 firstBloods = 10;
+    int32 aces = 11;
+    int32 clutches = 12;
+    int32 mostKills = 13;
 }
 
 message Match {
     string matchID = 1;
     string matchServer = 2;
-    string startTime = 3;
-    string endTime = 4;
-    string recordLink = 5;
-    string mapName = 6;
-    string modeName = 7;
-    string userName = 8;
-    string agent = 9;
+    string mapName = 3;
+    string modeName = 4;
+    string startTime = 5;
+    string endTime = 6;
+    string recordLink = 7;
 }
