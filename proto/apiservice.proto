@@ -24,7 +24,11 @@ message GetRequest{
     string query = 3;
 }
 
-
+message PostModifyUserReq{
+    string username = 1;
+    string playername = 2;
+    string tagline = 3;
+}
 
 
 message ReportGetResponse {
@@ -43,6 +47,7 @@ message PlayerGetResponse {
     Data data = 3;
     message Data {
         Player result = 1;
+        string resultStatus = 2;
         // Pagination pagination  = 2;
     }
 }

@@ -1,8 +1,9 @@
 # SQL project
 
-/reports/show               : show all report
-/search?query= ...          : get report by username
+- Show all players report
+- Get reports by username
 
-/players/detail?query= ...  : get player by username
+- Get player detail by username (Username, PlayerName, PlayerTagline, PlayerRank, PlayerStatus, Wins, Kills, Assists, KillsPerRound, FirstBloods, Aces, Clutches, MostKills)
+- Change playername and tagline
 
-/matches/search?query= ...  : get match by username
+- Get match by username

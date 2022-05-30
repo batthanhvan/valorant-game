@@ -38,3 +38,17 @@ func GetByUserName(req *pb.GetRequest) (*pb.PlayerGetResponse_Data, error) {
 		// Pagination: lib.Pagination(offset, limit, total),
 	}, nil
 }
+
+func ModifyUser(req *pb.PostModifyUserReq) (*pb.PlayerGetResponse_Data, error) {
+
+	res, status, err := mysql.ModifyPlayer(req.Username, req.Playername, req.Tagline)
+	if err != nil {
+		err = xerrors.Errorf("%w", err)
+		return nil, err
+	}
+
+	return &pb.PlayerGetResponse_Data{
+		Result:       res,
+		ResultStatus: status,
+	}, nil
+}

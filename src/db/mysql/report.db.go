@@ -6,12 +6,13 @@ import (
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
 	"github.com/batthanhvan/src/db/reports"
+	"github.com/batthanhvan/src/lib"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func ReportCount(search *db.Search) (*int64, error) {
 
-	db, err := sql.Open("mysql", db.ConStr)
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -31,7 +32,7 @@ func ReportCount(search *db.Search) (*int64, error) {
 
 func AllReport(search *db.Search) ([]*pb.Report, error) {
 
-	db, err := sql.Open("mysql", db.ConStr)
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -64,7 +65,7 @@ func AllReport(search *db.Search) ([]*pb.Report, error) {
 
 func ListReports(search *db.Search) ([]*pb.Report, error) {
 
-	db, err := sql.Open("mysql", db.ConStr)
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
 		panic(err.Error())
 	}

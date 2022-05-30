@@ -16,10 +16,4 @@ type Player struct {
 	Aces          int32          `gorm:"type:bigint"`
 	Clutches      int32          `gorm:"type:bigint"`
 	MostKills     int32          `gorm:"type:bigint"`
-
-	// MatchID   sql.NullString `gorm:"type:varchar(20)"`
-	// Score     sql.NullString
-	// Status    sql.NullString
-	// KDA       sql.NullString
-	// MatchDate sql.NullString
 }

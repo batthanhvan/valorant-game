@@ -28,3 +28,9 @@ func Unwrap(err error) error {
 		curerror = err.Unwrap()
 	}
 }
+
+func CheckError(err error) {
+	if err != nil {
+		panic(err.Error())
+	}
+}
