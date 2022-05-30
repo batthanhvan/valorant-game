@@ -16,6 +16,7 @@ package lib
 
 var (
 	SERVICE_NAME = "api-service"
+	DRIVER_NAME  = "mysql"
 	// ID           int64 = 2
 	// BUY_ADVERTISE_LIMIT int64 = 3
 )

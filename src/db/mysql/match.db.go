@@ -6,12 +6,13 @@ import (
 	"github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
 	"github.com/batthanhvan/src/db/matches"
+	"github.com/batthanhvan/src/lib"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func MatchCount(search *db.Search) (*int64, error) {
 
-	db, err := sql.Open("mysql", db.ConStr)
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -31,7 +32,7 @@ func MatchCount(search *db.Search) (*int64, error) {
 
 func ListMatches(search *db.Search) ([]*pb.Match, error) {
 
-	db, err := sql.Open("mysql", db.ConStr)
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
 		panic(err.Error())
 	}

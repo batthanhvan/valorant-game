@@ -1,6 +1,6 @@
 package players
 
-var QueryString string = `
+var GetPlayerDetailQuery string = `
 SELECT 
     p.username,
     p.playerName,
@@ -56,5 +56,20 @@ FROM
     GROUP BY matchID , username) rmostkill ON rmostkill.username = rs.username
     GROUP BY rs.username) round ON p.username = round.username
 WHERE p.username LIKE ?
-GROUP BY p.username
-LIMIT ?,?;`
+GROUP BY p.username`
+
+// LIMIT ?,?;`
+
+var ModifyPlayerNameQuery string = `
+UPDATE players 
+SET 
+    playerName = ?
+WHERE
+    username = ?`
+
+var ModifyTaglineQuery string = `
+UPDATE players 
+SET 
+    playerTagline = ?
+WHERE
+    username = ?`
