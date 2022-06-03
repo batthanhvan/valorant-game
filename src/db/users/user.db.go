@@ -12,6 +12,7 @@ import (
 
 func (u *User) SaveUser() (*User, error) {
 
+	db.DB.AutoMigrate(&u)
 	// var err error
 	err := db.DB.Create(&u).Error
 	if err != nil {
