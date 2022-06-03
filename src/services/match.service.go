@@ -1,9 +1,9 @@
-package service
+package services
 
 import (
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
-	"github.com/batthanhvan/src/db/mysql"
+	"github.com/batthanhvan/src/db/matches"
 	"github.com/batthanhvan/src/lib"
 	"golang.org/x/xerrors"
 )
@@ -13,7 +13,7 @@ func GetByMatchID(req *pb.GetRequest) (*pb.MatchGetResponse_Data, error) {
 	limit := lib.ParseInt32Val(req.Limit)
 	offset := lib.ParseInt32Val(req.Offset)
 
-	total, err := mysql.MatchCount(&db.Search{
+	total, err := matches.MatchCount(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
@@ -23,7 +23,7 @@ func GetByMatchID(req *pb.GetRequest) (*pb.MatchGetResponse_Data, error) {
 		return nil, err
 	}
 
-	res, err := mysql.ListMatches(&db.Search{
+	res, err := matches.ListMatches(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
