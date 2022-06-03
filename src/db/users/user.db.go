@@ -6,14 +6,14 @@ import (
 	"strings"
 
 	"github.com/batthanhvan/src/db"
-	"github.com/batthanhvan/utils/token"
+	"github.com/batthanhvan/src/utils/token"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func (u *User) SaveUser() (*User, error) {
 
-	var err error
-	err = db.DB.Create(&u).Error
+	// var err error
+	err := db.DB.Create(&u).Error
 	if err != nil {
 		return &User{}, err
 	}
@@ -73,7 +73,7 @@ func GetUserByID(uid uint) (User, error) {
 	var u User
 
 	if err := db.DB.First(&u, uid).Error; err != nil {
-		return u, errors.New("User not found!")
+		return u, errors.New("User not found")
 	}
 
 	u.PrepareGive()

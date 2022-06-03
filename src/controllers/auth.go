@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/batthanhvan/src/db/users"
-	"github.com/batthanhvan/utils/token"
+	"github.com/batthanhvan/src/utils/token"
 	"github.com/gin-gonic/gin"
 )
 
