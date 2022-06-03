@@ -1,4 +1,4 @@
-package mysql
+package players
 
 import (
 	"database/sql"
@@ -6,7 +6,6 @@ import (
 
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
-	"github.com/batthanhvan/src/db/players"
 	"github.com/batthanhvan/src/lib"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -33,11 +32,11 @@ func GetPlayer(search *db.Search) (*pb.Player, error) {
 	lib.CheckError(err)
 	defer db.Close()
 
-	results, err := db.Query(players.GetPlayerDetailQuery, search.Query)
+	results, err := db.Query(GetPlayerDetailQuery, search.Query)
 
 	lib.CheckError(err)
 
-	var player players.Player
+	var player Player
 	//	rr := make([]players.Player, 0)
 	for results.Next() {
 
@@ -73,10 +72,10 @@ func ModifyPlayer(username string, playername string, tagline string) (*pb.Playe
 		resultStatus = "Username not exists. "
 	}
 
-	result, err := db.Query(players.GetPlayerDetailQuery, username)
+	result, err := db.Query(GetPlayerDetailQuery, username)
 	lib.CheckError(err)
 
-	var player players.Player
+	var player Player
 	for result.Next() {
 		err = result.Scan(&player.UserName, &player.PlayerName, &player.PlayerTagline, &player.PlayerRank,
 			&player.PlayerStatus, &player.Wins, &player.Kills, &player.Assists, &player.KillsPerRound,
@@ -100,7 +99,7 @@ func modifyPlayerName(db *sql.DB, username string, playername string, resultStat
 		if checkPlayernameInUse.Next() {
 			resultStatus += "Player name is in use. "
 		} else {
-			_, err := db.Query(players.ModifyPlayerNameQuery, playername, username)
+			_, err := db.Query(ModifyPlayerNameQuery, playername, username)
 			lib.CheckError(err)
 			resultStatus += "Player name is changed successfully. "
 		}
@@ -120,7 +119,7 @@ func modifyTagline(db *sql.DB, username string, tagline string, resultStatus str
 		if checkTaglineInUse.Next() {
 			resultStatus += "Tagline is in use. "
 		} else {
-			_, err = db.Query(players.ModifyTaglineQuery, tagline, username)
+			_, err = db.Query(ModifyTaglineQuery, tagline, username)
 			lib.CheckError(err)
 			resultStatus += "Tagline is changed successfully. "
 		}
@@ -128,7 +127,7 @@ func modifyTagline(db *sql.DB, username string, tagline string, resultStatus str
 	return resultStatus
 }
 
-func ConvertPlayerToProto(p players.Player) *pb.Player {
+func ConvertPlayerToProto(p Player) *pb.Player {
 	ppb := &pb.Player{}
 
 	ppb.Username = p.UserName.String
