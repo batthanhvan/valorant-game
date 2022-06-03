@@ -3,7 +3,7 @@ package controllers
 import (
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/lib"
-	"github.com/batthanhvan/src/service"
+	"github.com/batthanhvan/src/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +14,7 @@ func HandleGetByUserName(g *gin.Context) {
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
-	res, err := service.GetByUserName(&req)
+	res, err := services.GetByUserName(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return
@@ -29,7 +29,7 @@ func HandlePostModifyUser(g *gin.Context) {
 		Tagline:    g.DefaultQuery("tagline", g.Param("tagline")),
 	}
 
-	res, err := service.ModifyUser(&req)
+	res, err := services.ModifyUser(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return

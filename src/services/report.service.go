@@ -1,9 +1,9 @@
-package service
+package services
 
 import (
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
-	"github.com/batthanhvan/src/db/mysql"
+	"github.com/batthanhvan/src/db/reports"
 	"github.com/batthanhvan/src/lib"
 	"golang.org/x/xerrors"
 )
@@ -13,7 +13,7 @@ func GetAllReports(req *pb.GetRequest) (*pb.ReportGetResponse_Data, error) {
 	limit := lib.ParseInt32Val(req.Limit)
 	offset := lib.ParseInt32Val(req.Offset)
 
-	reportNum, err := mysql.ReportCount(&db.Search{
+	reportNum, err := reports.ReportCount(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
@@ -23,7 +23,7 @@ func GetAllReports(req *pb.GetRequest) (*pb.ReportGetResponse_Data, error) {
 		return nil, err
 	}
 
-	result, err := mysql.AllReport(&db.Search{
+	result, err := reports.AllReport(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
@@ -44,7 +44,7 @@ func GetReportByUserName(req *pb.GetRequest) (*pb.ReportGetResponse_Data, error)
 	limit := lib.ParseInt32Val(req.Limit)
 	offset := lib.ParseInt32Val(req.Offset)
 
-	total, err := mysql.ReportCount(&db.Search{
+	total, err := reports.ReportCount(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
@@ -54,7 +54,7 @@ func GetReportByUserName(req *pb.GetRequest) (*pb.ReportGetResponse_Data, error)
 		return nil, err
 	}
 
-	res, err := mysql.ListReports(&db.Search{
+	res, err := reports.ListReports(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,

@@ -3,7 +3,7 @@ package controllers
 import (
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/lib"
-	"github.com/batthanhvan/src/service"
+	"github.com/batthanhvan/src/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +14,7 @@ func HandleShowAllReports(g *gin.Context) {
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
-	res, err := service.GetAllReports(&req)
+	res, err := services.GetAllReports(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return
@@ -29,7 +29,7 @@ func HandleGetReportByUsername(g *gin.Context) {
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
-	res, err := service.GetReportByUserName(&req)
+	res, err := services.GetReportByUserName(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return

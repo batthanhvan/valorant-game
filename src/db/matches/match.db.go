@@ -1,11 +1,10 @@
-package mysql
+package matches
 
 import (
 	"database/sql"
 
 	"github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/db"
-	"github.com/batthanhvan/src/db/matches"
 	"github.com/batthanhvan/src/lib"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -39,14 +38,14 @@ func ListMatches(search *db.Search) ([]*pb.Match, error) {
 	defer db.Close()
 
 	// search.Query = "%" + search.Query + "%"
-	results, err := db.Query(matches.QueryString, search.Query, search.Skip, search.Limit)
+	results, err := db.Query(QueryString, search.Query, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())
 	}
 
-	var r matches.Match
-	rr := make([]matches.Match, 0)
+	var r Match
+	rr := make([]Match, 0)
 	for results.Next() {
 
 		err = results.Scan(&r.MatchID, &r.MatchServer, &r.MapName, &r.ModeName, &r.StartTime, &r.EndTime, &r.RecordLink)
@@ -65,7 +64,7 @@ func ListMatches(search *db.Search) ([]*pb.Match, error) {
 
 }
 
-func ConvertMatchToProto(p matches.Match) *pb.Match {
+func ConvertMatchToProto(p Match) *pb.Match {
 	ppb := &pb.Match{}
 
 	ppb.MatchID = p.MatchID.String
