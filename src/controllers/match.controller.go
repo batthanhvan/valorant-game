@@ -9,7 +9,7 @@ import (
 
 func HandleGetByMatchID(g *gin.Context) {
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("query", "%"),
+		Query:  g.DefaultQuery("username", "%"),
 		Limit:  g.DefaultQuery("limit", "20"),
 		Offset: g.DefaultQuery("offset", "0"),
 	}

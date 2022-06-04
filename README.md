@@ -1,9 +1,13 @@
 # SQL project
 
-- Show all players report
-- Get reports by username
+- Register: /register
+- Login: /login (=> Got **token** here)
+- Get user info: /user
 
-- Get player detail by username (Username, PlayerName, PlayerTagline, PlayerRank, PlayerStatus, Wins, Kills, Assists, KillsPerRound, FirstBloods, Aces, Clutches, MostKills)
-- Change playername and tagline
+- Show all players report: /admin/reports/show
+- Get reports by username: /admin/reports/search?username=... (add **token** to validate)
 
-- Get match by username
+- Get player detail by username: /players/:username
+- Change playername and tagline: /modify/:playername/:tagline (POST method) (add **token** to validate)
+
+- Get match by username: /matches/search?username=...

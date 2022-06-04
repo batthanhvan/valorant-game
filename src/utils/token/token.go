@@ -26,7 +26,6 @@ func GenerateToken(user_id uint) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	return token.SignedString([]byte(os.Getenv("API_SECRET")))
-
 }
 
 func TokenValid(c *gin.Context) error {
@@ -35,12 +34,10 @@ func TokenValid(c *gin.Context) error {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
-		return []byte(os.Getenv("API_SECRET")), nil
+		return []byte(os.Getenv("API_SECRET")), nil // what does this mean...?
 	})
-	if err != nil {
-		return err
-	}
-	return nil
+
+	return err
 }
 
 func ExtractToken(c *gin.Context) string {
