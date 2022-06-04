@@ -92,6 +92,8 @@ func modifyPlayerName(db *sql.DB, username string, playername string, resultStat
 		resultStatus += "Empty player name. "
 	} else if strings.Contains(playername, " ") {
 		resultStatus += "Player name can't contain space character. "
+	} else if len(playername) > 16 {
+		resultStatus += "Player name must be less than 17 characters. "
 	} else {
 		checkPlayernameInUse, err := db.Query("SELECT 1 FROM players WHERE username=? AND playerName=?", username, playername)
 		lib.CheckError(err)
@@ -112,6 +114,8 @@ func modifyTagline(db *sql.DB, username string, tagline string, resultStatus str
 		resultStatus += "Empty tagline. "
 	} else if strings.Contains(tagline, " ") {
 		resultStatus += "Tagline can't contain space character. "
+	} else if len(tagline) > 5 {
+		resultStatus += "Tagline must be less than 6 characters. "
 	} else {
 		checkTaglineInUse, err := db.Query("SELECT 1 FROM players WHERE username=? AND playerTagline=?", username, tagline)
 		lib.CheckError(err)

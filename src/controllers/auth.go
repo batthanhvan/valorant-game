@@ -27,12 +27,12 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	u := users.User{}
+	user := users.User{}
 
-	u.Username = input.Username
-	u.Password = input.Password
+	user.Username = input.Username
+	user.Password = input.Password
 
-	token, err := users.LoginCheck(u.Username, u.Password)
+	token, err := users.LoginCheck(user.Username, user.Password)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "username or password is incorrect."})
@@ -58,7 +58,6 @@ func Register(c *gin.Context) {
 	u.Password = input.Password
 
 	_, err := u.SaveUser()
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -69,20 +68,17 @@ func Register(c *gin.Context) {
 }
 
 func CurrentUser(c *gin.Context) {
-
 	user_id, err := token.ExtractTokenID(c)
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	u, err := users.GetUserByID(user_id)
-
+	user, err := users.GetUserByID(user_id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "success", "data": u})
+	c.JSON(http.StatusOK, gin.H{"message": "success", "data": user})
 }
