@@ -4,6 +4,7 @@ import (
 	"github.com/batthanhvan/middlewares"
 	"github.com/batthanhvan/src/controllers"
 	"github.com/batthanhvan/src/db"
+	"github.com/batthanhvan/src/lib"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,13 +18,13 @@ func main() {
 	r.POST("/login", controllers.Login)
 	r.GET("/user", controllers.CurrentUser)
 
-	admin := r.Group("/admin")
-	// admin.Use(middlewares.AuthenticateRole("admin"))
+	// admin := r.Group("/admin")
+	// admin.Use(middlewares.Only(lib.ROLE_ADMIN))
 
-	reportGroup := admin.Group("/reports")
-	reportGroup.Use(middlewares.AuthenticateRole("admin"))
-	reportGroup.GET("/show", controllers.HandleShowAllReports)
-	reportGroup.GET("/search", controllers.HandleGetReportByUsername)
+	reportGroup := r.Group("/reports")
+
+	reportGroup.GET("/show", middlewares.Only(lib.ROLE_ADMIN), controllers.HandleShowAllReports)
+	reportGroup.GET("/search", middlewares.Only(lib.ROLE_ADMIN), controllers.HandleGetReportByUsername)
 
 	playerGroup := r.Group("/players")
 	playerGroup.GET("/:username", controllers.HandleGetByUserName)
