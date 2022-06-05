@@ -5,6 +5,7 @@ import (
 	"github.com/batthanhvan/src/controllers"
 	"github.com/batthanhvan/src/db"
 	"github.com/batthanhvan/src/lib"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +13,14 @@ func main() {
 	db.ConnectDataBase()
 	r := gin.Default()
 	r.SetTrustedProxies(nil)
+
+	// gin.SetMode(gin.ReleaseMode)
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:  []string{"*"},
+		AllowMethods:  []string{"GET", "PUT", "POST", "DELETE"},
+		AllowHeaders:  []string{"Authorization", "Content-Type", "User-Agent"},
+		ExposeHeaders: []string{"content-disposition", "content-description"},
+	}))
 
 	// api := r.Group("/api")
 	r.POST("/register", controllers.Register)
