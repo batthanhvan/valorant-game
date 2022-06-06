@@ -22,6 +22,21 @@ func InternalServerError(c *gin.Context, err error) {
 	})
 }
 
+func NotFoundRequest(c *gin.Context, err error) {
+	c.Set("error", err)
+	err = Unwrap(err)
+
+	var errorStatus string
+	if err == nil {
+		errorStatus = "Page not found"
+	} else {
+		errorStatus = err.Error()
+	}
+	c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+		"error": errorStatus,
+	})
+}
+
 func Success(c *gin.Context, response interface{}) {
 	c.AbortWithStatusJSON(http.StatusOK, gin.H{
 		"code":    200,

@@ -1,6 +1,6 @@
 package matches
 
-var QueryString string = `
+var MatchesDetailQuery string = `
 SELECT 
     m.matchID,
     m.matchServer,

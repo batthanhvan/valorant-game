@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"strconv"
+
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/lib"
 	"github.com/batthanhvan/src/services"
@@ -8,13 +10,21 @@ import (
 )
 
 func HandleGetByMatchID(g *gin.Context) {
-	req := pb.GetRequest{
-		Query:  g.DefaultQuery("username", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
-		Offset: g.DefaultQuery("offset", "0"),
+	page, err := strconv.Atoi(g.DefaultQuery("page", "1"))
+	lib.CheckError(err)
+
+	if page <= 0 {
+		lib.NotFoundRequest(g, err)
+		return
 	}
 
-	res, err := services.GetByMatchID(&req)
+	req := pb.GetRequest{
+		Query:  g.Param("username"),
+		Limit:  "10",
+		Offset: strconv.Itoa((page - 1) * 10),
+	}
+
+	res, err := services.GetMatchByUsername(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"strconv"
+
 	pb "github.com/batthanhvan/proto/pb"
 	"github.com/batthanhvan/src/lib"
 	"github.com/batthanhvan/src/services"
@@ -8,25 +10,41 @@ import (
 )
 
 func HandleShowAllReports(g *gin.Context) {
+	page, err := strconv.Atoi(g.DefaultQuery("page", "1"))
+	lib.CheckError(err)
+
+	if page <= 0 {
+		lib.NotFoundRequest(g, err)
+		return
+	}
+
 	req := pb.GetRequest{
 		Query:  g.DefaultQuery("query", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
-		Offset: g.DefaultQuery("offset", "0"),
+		Limit:  "10",
+		Offset: strconv.Itoa((page - 1) * 10),
 	}
 
 	res, err := services.GetAllReports(&req)
 	if err != nil {
-		lib.BadRequest(g, err)
+		lib.NotFoundRequest(g, err)
 		return
 	}
 	lib.Success(g, res)
 }
 
 func HandleGetReportByUsername(g *gin.Context) {
+	page, err := strconv.Atoi(g.DefaultQuery("page", "1"))
+	lib.CheckError(err)
+
+	if page <= 0 {
+		lib.NotFoundRequest(g, err)
+		return
+	}
+
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("username", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
-		Offset: g.DefaultQuery("offset", "0"),
+		Query:  g.Param("username"),
+		Limit:  "10",
+		Offset: strconv.Itoa((page - 1) * 10),
 	}
 
 	res, err := services.GetReportByUserName(&req)

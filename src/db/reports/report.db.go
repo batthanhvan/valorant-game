@@ -9,7 +9,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func ReportCount(search *db.Search) (*int64, error) {
+func ReportCountAll(search *db.Search) (*int64, error) {
 
 	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
@@ -17,8 +17,7 @@ func ReportCount(search *db.Search) (*int64, error) {
 	}
 	defer db.Close()
 
-	search.Query = "%" + search.Query + "%"
-	total := db.QueryRow("select count(*) from reports WHERE username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
+	total := db.QueryRow(CountAllReport)
 
 	var r int64
 	err = total.Scan(&r)
@@ -37,7 +36,7 @@ func AllReport(search *db.Search) ([]*pb.Report, error) {
 	}
 	defer db.Close()
 
-	results, err := db.Query(QueryAllString, search.Skip, search.Limit)
+	results, err := db.Query(GetAllReport, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())
@@ -62,6 +61,26 @@ func AllReport(search *db.Search) ([]*pb.Report, error) {
 	return arr, nil
 }
 
+func ReportCount(search *db.Search) (*int64, error) {
+
+	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+
+	search.Query = "%" + search.Query + "%"
+	total := db.QueryRow(CountReport, search.Query)
+
+	var r int64
+	err = total.Scan(&r)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return &r, nil
+}
+
 func ListReports(search *db.Search) ([]*pb.Report, error) {
 
 	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
@@ -71,7 +90,7 @@ func ListReports(search *db.Search) ([]*pb.Report, error) {
 	defer db.Close()
 
 	search.Query = "%" + search.Query + "%"
-	results, err := db.Query(QueryString, search.Query, search.Skip, search.Limit)
+	results, err := db.Query(GetReportByUsername, search.Query, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())

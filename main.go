@@ -31,9 +31,9 @@ func main() {
 	// admin.Use(middlewares.Only(lib.ROLE_ADMIN))
 
 	reportGroup := r.Group("/reports")
-
-	reportGroup.GET("/show", middlewares.Only(lib.ROLE_ADMIN), controllers.HandleShowAllReports)
-	reportGroup.GET("/search", middlewares.Only(lib.ROLE_ADMIN), controllers.HandleGetReportByUsername)
+	reportGroup.Use(middlewares.Only(lib.ROLE_ADMIN))
+	reportGroup.GET("", controllers.HandleShowAllReports)
+	reportGroup.GET("/:username", controllers.HandleGetReportByUsername)
 
 	playerGroup := r.Group("/players")
 	playerGroup.GET("/:username", controllers.HandleGetByUserName)
@@ -41,7 +41,7 @@ func main() {
 	playerGroup.POST("/modify/:playername/:tagline", controllers.HandlePostModifyUser)
 
 	matchGroup := r.Group("/matches")
-	matchGroup.GET("/search", controllers.HandleGetByMatchID)
+	matchGroup.GET("/:username", controllers.HandleGetByMatchID)
 
 	r.Run("localhost:8080")
 }
