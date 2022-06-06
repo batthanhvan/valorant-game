@@ -42,5 +42,8 @@ func main() {
 	matchGroup := r.Group("/matches")
 	matchGroup.GET("/:username", controllers.HandleGetByMatchID)
 
+	leaderboardGroup := r.Group("/leaderboard")
+	leaderboardGroup.GET("", controllers.HandleGetLeaderboard)
+
 	r.Run("localhost:8080")
 }

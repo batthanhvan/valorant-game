@@ -13,12 +13,7 @@ FROM
     reports r
         JOIN
     matches m ON m.matchID = r.matchID
-ORDER BY (SELECT 
-        startTime
-    FROM
-        matches m
-    WHERE
-        m.matchID = r.matchID)
+ORDER BY m.startTime DESC
 LIMIT ?,?`
 
 var CountReport string = `
@@ -36,10 +31,5 @@ FROM
         JOIN
     matches m ON m.matchID = r.matchID
 WHERE r.username LIKE ?
-ORDER BY (SELECT 
-        startTime
-    FROM
-        matches m
-    WHERE
-        m.matchID = r.matchID)
+ORDER BY m.startTime DESC
 LIMIT ?,?;`
