@@ -1,15 +1,34 @@
 package reports
 
-var QueryAllString string = `
+var CountAllReport string = `
+SELECT 
+    COUNT(*)
+FROM
+    reports r`
+
+var GetAllReport string = `
 SELECT 
     r.reportCategory, r.reportDetail, DATE(m.startTime), m.recordLink, r.username
 FROM
     reports r
         JOIN
     matches m ON m.matchID = r.matchID
-LIMIT ?,?;`
+ORDER BY (SELECT 
+        startTime
+    FROM
+        matches m
+    WHERE
+        m.matchID = r.matchID)
+LIMIT ?,?`
 
-var QueryString string = `
+var CountReport string = `
+SELECT 
+    COUNT(*)
+FROM
+    reports r
+WHERE r.username LIKE ?`
+
+var GetReportByUsername string = `
 SELECT 
     r.reportCategory, r.reportDetail, DATE(m.startTime), m.recordLink, r.username
 FROM
@@ -17,4 +36,10 @@ FROM
         JOIN
     matches m ON m.matchID = r.matchID
 WHERE r.username LIKE ?
+ORDER BY (SELECT 
+        startTime
+    FROM
+        matches m
+    WHERE
+        m.matchID = r.matchID)
 LIMIT ?,?;`

@@ -17,8 +17,8 @@ func MatchCount(search *db.Search) (*int64, error) {
 	}
 	defer db.Close()
 
-	// search.Query = "%" + search.Query + "%"
-	total := db.QueryRow("select count(*) from playerinmatch WHERE username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
+	// total := db.QueryRow("select count(*) from playerinmatch WHERE username like ? LIMIT ?,?", search.Query, search.Skip, search.Limit)
+	total := db.QueryRow("select count(*) from playerinmatch WHERE username like ?", search.Query)
 
 	var r int64
 	err = total.Scan(&r)
@@ -29,7 +29,7 @@ func MatchCount(search *db.Search) (*int64, error) {
 	return &r, nil
 }
 
-func ListMatches(search *db.Search) ([]*pb.Match, error) {
+func MatchesByUsername(search *db.Search) ([]*pb.Match, error) {
 
 	db, err := sql.Open(lib.DRIVER_NAME, db.ConStr)
 	if err != nil {
@@ -37,8 +37,7 @@ func ListMatches(search *db.Search) ([]*pb.Match, error) {
 	}
 	defer db.Close()
 
-	// search.Query = "%" + search.Query + "%"
-	results, err := db.Query(QueryString, search.Query, search.Skip, search.Limit)
+	results, err := db.Query(MatchesDetailQuery, search.Query, search.Skip, search.Limit)
 
 	if err != nil {
 		panic(err.Error())

@@ -8,9 +8,9 @@ import (
 )
 
 func HandleShowAllReports(g *gin.Context) {
+
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("query", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
+		Limit:  g.DefaultQuery("limit", "10"),
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
@@ -23,9 +23,10 @@ func HandleShowAllReports(g *gin.Context) {
 }
 
 func HandleGetReportByUsername(g *gin.Context) {
+
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("username", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
+		Query:  g.Param("username"),
+		Limit:  g.DefaultQuery("limit", "10"),
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 

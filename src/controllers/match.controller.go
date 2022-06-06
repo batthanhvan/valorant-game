@@ -8,13 +8,14 @@ import (
 )
 
 func HandleGetByMatchID(g *gin.Context) {
+
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("username", "%"),
-		Limit:  g.DefaultQuery("limit", "20"),
+		Query:  g.Param("username"),
+		Limit:  g.DefaultQuery("limit", "10"),
 		Offset: g.DefaultQuery("offset", "0"),
 	}
 
-	res, err := services.GetByMatchID(&req)
+	res, err := services.GetMatchByUsername(&req)
 	if err != nil {
 		lib.BadRequest(g, err)
 		return

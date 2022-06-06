@@ -1,13 +1,15 @@
 # SQL project
 
-- Register: /register
-- Login: /login (=> Got **token** here)
-- Get user info: /user
+- Register
+- Login
+- Get user info
 
-- Show all players report: /admin/reports/show
-- Get reports by username: /admin/reports/search?username=... (add **token** to validate)
+- Show all players report
+- Get reports by username
 
-- Get player detail by username: /players/:username
-- Change playername and tagline: /modify/:playername/:tagline (POST method) (add **token** to validate)
+- Get player detail by username
+- Change playername and tagline
 
-- Get match by username: /matches/search?username=...
+- Get match by username
+
+![valorant_database_demo](https://user-images.githubusercontent.com/78261243/172040781-64d0bae5-757d-4723-aa95-9691a5b54c5a.png)

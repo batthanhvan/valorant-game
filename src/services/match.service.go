@@ -8,14 +8,12 @@ import (
 	"golang.org/x/xerrors"
 )
 
-func GetByMatchID(req *pb.GetRequest) (*pb.MatchGetResponse_Data, error) {
+func GetMatchByUsername(req *pb.GetRequest) (*pb.MatchGetResponse_Data, error) {
 
 	limit := lib.ParseInt32Val(req.Limit)
 	offset := lib.ParseInt32Val(req.Offset)
 
 	total, err := matches.MatchCount(&db.Search{
-		Limit: int(limit),
-		Skip:  int(offset),
 		Query: req.Query,
 	})
 	if err != nil {
@@ -23,7 +21,7 @@ func GetByMatchID(req *pb.GetRequest) (*pb.MatchGetResponse_Data, error) {
 		return nil, err
 	}
 
-	res, err := matches.ListMatches(&db.Search{
+	res, err := matches.MatchesByUsername(&db.Search{
 		Limit: int(limit),
 		Skip:  int(offset),
 		Query: req.Query,
