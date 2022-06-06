@@ -13,9 +13,7 @@ import (
 
 func HandleGetByUserName(g *gin.Context) {
 	req := pb.GetRequest{
-		Query:  g.DefaultQuery("query", g.Param("username")),
-		Limit:  g.DefaultQuery("limit", "20"),
-		Offset: g.DefaultQuery("offset", "0"),
+		Query: g.Param("username"),
 	}
 
 	res, err := services.GetByUserName(&req)
@@ -39,9 +37,9 @@ func HandlePostModifyUser(c *gin.Context) {
 	}
 
 	req := pb.PostModifyUserReq{
-		Username:   c.DefaultQuery("username", user.Username),
-		Playername: c.DefaultQuery("playername", c.Param("playername")),
-		Tagline:    c.DefaultQuery("tagline", c.Param("tagline")),
+		Username:   user.Username,
+		Playername: c.Param("playername"),
+		Tagline:    c.Param("tagline"),
 	}
 
 	res, err := services.ModifyUser(&req)

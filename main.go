@@ -27,17 +27,16 @@ func main() {
 	r.POST("/login", controllers.Login)
 	r.GET("/user", controllers.CurrentUser)
 
-	// admin := r.Group("/admin")
-	// admin.Use(middlewares.Only(lib.ROLE_ADMIN))
+	admin := r.Group("/admin")
+	admin.Use(middlewares.Only(lib.ROLE_ADMIN))
+	// admin.POST("/restrict/:username", controllers.HandlePostRestrictPlayerTime)
 
-	reportGroup := r.Group("/reports")
-	reportGroup.Use(middlewares.Only(lib.ROLE_ADMIN))
+	reportGroup := admin.Group("/reports")
 	reportGroup.GET("", controllers.HandleShowAllReports)
 	reportGroup.GET("/:username", controllers.HandleGetReportByUsername)
 
 	playerGroup := r.Group("/players")
 	playerGroup.GET("/:username", controllers.HandleGetByUserName)
-	// playerGroup.POST("/restrict/:username", controllers.HandlePostRestrictPlayerTime)
 	playerGroup.POST("/modify/:playername/:tagline", controllers.HandlePostModifyUser)
 
 	matchGroup := r.Group("/matches")
