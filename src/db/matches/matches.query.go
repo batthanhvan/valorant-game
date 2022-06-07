@@ -18,4 +18,5 @@ FROM
         playerinmatch
     WHERE
         username LIKE ?) pm ON m.matchID = pm.matchID
+ORDER BY m.startTime DESC
 LIMIT ?,?;`

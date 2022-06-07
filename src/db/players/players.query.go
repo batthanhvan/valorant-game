@@ -7,39 +7,29 @@ SELECT
     p.playerTagline,
     p.playerRank,
     p.playerStatus,
-    COUNT(pm.username) wins,
-    round.kills,
-    round.assists,
-    round.killPerRound,
-    round.firstbloods,
-    round.aces,
-    round.clutches,
-    round.mostkill
+    pm.wins,
+    r.kills,
+    r.assists,
+    (SELECT r.kills / r.rCount) killPerRound,
+    r.firstbloods,
+    r.aces,
+    r.clutches,
+    MAX(rmostkill.killPerMatch) mostkill
 FROM
     players p
         JOIN
     (SELECT 
-        username, status
+        COUNT(username) wins, status, username
     FROM
         playerinmatch
     WHERE
-        status = 'Victory') pm ON p.username = pm.username
+        status = 'Victory'
+    GROUP BY username) pm ON p.username = pm.username
         JOIN
     (SELECT 
-        rs.username,
-            r.kills,
-            r.assists,
-            r.kills / r.roundCount killPerRound,
-            r.firstbloods,
-            r.aces,
-            r.clutches,
-            MAX(rmostkill.killPerMatch) mostkill
-    FROM
-        rounds rs
-    JOIN (SELECT 
         SUM(killCount) kills,
             SUM(assistCount) assists,
-            COUNT(*) roundCount,
+            COUNT(*) rCount,
             SUM(firstBlood) firstbloods,
             COUNT(CASE
                 WHEN killCount = 5 THEN 1
@@ -48,17 +38,14 @@ FROM
             username
     FROM
         rounds
-    GROUP BY username) r ON rs.username = r.username
-    JOIN (SELECT 
+    GROUP BY username) r ON p.username = r.username
+        JOIN
+    (SELECT 
         SUM(killCount) killPerMatch, username
     FROM
         rounds
-    GROUP BY matchID , username) rmostkill ON rmostkill.username = rs.username
-    GROUP BY rs.username) round ON p.username = round.username
-WHERE p.username LIKE ?
-GROUP BY p.username`
-
-// LIMIT ?,?;`
+    GROUP BY matchID , username) rmostkill ON rmostkill.username = p.username
+WHERE p.username LIKE ?`
 
 var ModifyPlayerNameQuery string = `
 UPDATE players 

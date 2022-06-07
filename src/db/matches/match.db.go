@@ -38,7 +38,6 @@ func MatchesByUsername(search *db.Search) ([]*pb.Match, error) {
 	defer db.Close()
 
 	results, err := db.Query(MatchesDetailQuery, search.Query, search.Skip, search.Limit)
-
 	if err != nil {
 		panic(err.Error())
 	}
@@ -46,7 +45,6 @@ func MatchesByUsername(search *db.Search) ([]*pb.Match, error) {
 	var r Match
 	rr := make([]Match, 0)
 	for results.Next() {
-
 		err = results.Scan(&r.MatchID, &r.MatchServer, &r.MapName, &r.ModeName, &r.StartTime, &r.EndTime, &r.RecordLink)
 
 		if err != nil {

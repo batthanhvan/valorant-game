@@ -18,18 +18,6 @@ message Pagination {
     int64 total = 3;
 }
 
-message GetRequest{
-    string limit = 1;
-    string offset = 2;
-    string query = 3;
-}
-
-message PostModifyUserReq{
-    string username = 1;
-    string playername = 2;
-    string tagline = 3;
-}
-
 
 message ReportGetResponse {
     int32 code = 1;
@@ -61,6 +49,17 @@ message MatchGetResponse {
         Pagination pagination  = 2;
     }
 }
+
+message LeaderboardGetResponse {
+    int32 code = 1;
+    bool success = 2;
+    Data data = 3;
+    message Data {
+        repeated LeaderboardPlayer result = 1;
+        Pagination pagination  = 2;
+    }
+}
+
 
 message Report {
     string reportCategory = 1;
@@ -94,4 +93,25 @@ message Match {
     string startTime = 5;
     string endTime = 6;
     string recordLink = 7;
+}
+
+message LeaderboardPlayer {
+    string userName = 1;
+	string playerName = 2;
+	string playerTagline = 3;
+	string playerRank = 4;
+	int32 rating = 5;
+}
+
+
+message GetRequest{
+    string limit = 1;
+    string offset = 2;
+    string query = 3;
+}
+
+message PostModifyUserReq{
+    string username = 1;
+    string playername = 2;
+    string tagline = 3;
 }
