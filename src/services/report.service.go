@@ -87,14 +87,13 @@ func PostNewReport(username string, reportCategory string, matchID string, repor
 		return "We've encountered an error, please refresh the page.", http.StatusBadRequest
 	}
 
-	_, err = db.Query(reports.PostNewReport, username, reportCategory, matchID, reportDetail)
-	if err != nil {
-		return "Please check for the correct username and match ID.", http.StatusOK
-	}
-
 	if checkDuplicateReport.Next() {
 		return "This player's behaviour in this match has already been reported.", http.StatusOK
 	} else {
+		_, err = db.Query(reports.PostNewReport, username, reportCategory, matchID, reportDetail)
+		if err != nil {
+			return "Please check for the correct username and match ID.", http.StatusOK
+		}
 
 		checkPlayerInMatch, err := db.Query(reports.CheckPlayerInMatch, username, matchID)
 		if err != nil {
