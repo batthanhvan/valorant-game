@@ -26,6 +26,8 @@ func main() {
 	r.POST("/register", controllers.Register)
 	r.POST("/login", controllers.Login)
 	r.GET("/user", controllers.CurrentUser)
+	r.GET("/report", controllers.HandleGetReportOptions)
+	r.POST("/report", controllers.HandlePostReport)
 
 	admin := r.Group("/admin")
 	admin.Use(middlewares.Only(lib.ROLE_ADMIN))

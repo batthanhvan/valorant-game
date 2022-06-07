@@ -33,3 +33,16 @@ FROM
 WHERE r.username LIKE ?
 ORDER BY m.startTime DESC
 LIMIT ?,?;`
+
+var PostNewReport string = `
+INSERT INTO reports(username, reportCategory, matchID, reportDetail)
+values(?,?,?,?)
+`
+var CheckPlayerInMatch string = `
+SELECT 1
+FROM
+    valorant.playerinmatch
+WHERE
+    username = ?
+        AND matchID = ?
+`
