@@ -29,6 +29,16 @@ message ReportGetResponse {
     }
 }
 
+message ReportOptionsGetResponse {
+    int32 code = 1;
+    bool success = 2;
+    Data data = 3;
+    message Data {
+        repeated string questions = 1;
+        repeated string categories  = 2;
+    }
+}
+
 message PlayerGetResponse {
     int32 code = 1;
     bool success = 2;

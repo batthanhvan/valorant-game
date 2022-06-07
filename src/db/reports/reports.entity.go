@@ -9,3 +9,10 @@ type Report struct {
 	RecordLink     sql.NullString `gorm:"-:migration;->"`
 	UserName       sql.NullString `gorm:"type:varchar(16)"`
 }
+
+type PostReport struct {
+	Username       string `json:"username" binding:"required"`
+	ReportCategory string `json:"reportCategory" binding:"required"`
+	MatchID        string `json:"matchid" binding:"required"`
+	ReportDetail   string `json:"detail" binding:"required"`
+}

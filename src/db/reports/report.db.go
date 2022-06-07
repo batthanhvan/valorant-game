@@ -113,7 +113,6 @@ func ListReports(search *db.Search) ([]*pb.Report, error) {
 		arr = append(arr, ConvertReportToProto(v))
 	}
 	return arr, nil
-
 }
 
 func ConvertReportToProto(p Report) *pb.Report {
