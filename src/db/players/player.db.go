@@ -136,7 +136,7 @@ func ConvertPlayerToProto(p Player) *pb.Player {
 
 	ppb.Username = p.UserName.String
 	ppb.PlayerName = p.PlayerName.String
-	ppb.PlayerTagline = p.PlayerTagline
+	ppb.PlayerTagline = p.PlayerTagline.String
 	ppb.PlayerRank = p.PlayerRank.String
 	ppb.PlayerStatus = p.PlayerStatus.String
 	ppb.Wins = p.Wins

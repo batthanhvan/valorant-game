@@ -5,7 +5,7 @@ import "database/sql"
 type Player struct {
 	UserName      sql.NullString `gorm:"type:varchar(16)"`
 	PlayerName    sql.NullString `gorm:"type:varchar(16)"`
-	PlayerTagline int32          `gorm:"type:bigint"`
+	PlayerTagline sql.NullString `gorm:"type:varchar(5)"`
 	PlayerRank    sql.NullString `gorm:"type:varchar(13)"`
 	PlayerStatus  sql.NullString `gorm:"type:varchar(18)"`
 	Wins          int32          `gorm:"type:bigint"`
