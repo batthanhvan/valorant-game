@@ -82,7 +82,7 @@ message Report {
 message Player {
     string username = 1;
     string playerName = 2;
-    int32 playerTagline = 3;
+    string playerTagline = 3;
     string playerRank = 4;
     string playerStatus = 5;
     int32 wins = 6;
