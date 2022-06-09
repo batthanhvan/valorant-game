@@ -1,0 +1,158 @@
+/* line-height: 1.15;
+
+--home-hero-background-desktop-url: url("https://imgsvc.trackercdn.com/url/height(1000),quality(40)/https%3A%2F%2Ftrackercdn.com%2Fcdn%2Ftracker.gg%2Fvalorant%2Fimages%2Fvalorant-bg.jpg/image.jpg");
+--home-hero-background-tablet-url: url("https://imgsvc.trackercdn.com/url/size(1080),fit(cover),quality(40)/https%3A%2F%2Ftrackercdn.com%2Fcdn%2Ftracker.gg%2Fvalorant%2Fimages%2Fvalorant-bg.jpg/image.jpg");
+--home-hero-background-mobile-url: url("https://imgsvc.trackercdn.com/url/size(540),fit(cover),quality(30)/https%3A%2F%2Ftrackercdn.com%2Fcdn%2Ftracker.gg%2Fvalorant%2Fimages%2Fvalorant-bg.jpg/image.jpg");
+--game-bar-background-color: #141414;
+--main-nav-background-color: #111111;
+
+color: var(--text-color);
+font-family: Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: .9375rem;
+font-weight: 400;
+box-sizing: border-box;
+outline: none;
+-webkit-tap-highlight-color: transparent;
+position: relative;
+border-radius: var(--border-radius)!important;
+margin: .75rem!important; */
+.match{
+    position: relative;
+    border-radius: var(--border-radius)!important;
+    margin: .75rem!important; 
+}
+.container {
+    background-color: #17202f;
+    display: grid;    
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: 400px 1000px ;
+}
+h1{
+	color: #eeee;
+	
+	font-size: 20px;
+    margin-right: -40px
+}
+hr{
+    color: red;
+}
+header {
+    width: 100%;
+    background-image: url("https://imgsvc.trackercdn.com/url/height(1000),quality(40)/https%3A%2F%2Ftrackercdn.com%2Fcdn%2Ftracker.gg%2Fvalorant%2Fimages%2Fvalorant-bg.jpg/image.jpg");
+    background-size: 100% 100%;
+    grid-column: span 12;
+    background-repeat: no-repeat
+}
+
+aside {
+    background-color: #101823;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    padding-left: 54px;
+}
+.basic-info-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+.rankImg{
+    margin-left: -40px;
+        width: 90px;
+}
+.player-info-container{
+    display: flex;
+    flex-direction:row;
+    align-items: flex-start;
+    justify-content:space-around;
+
+}
+.tag{
+    margin-left: -88px;
+}
+
+main {
+    background-color: #101823;
+    grid-column: span 10;
+    margin: 50px;
+}
+.match__row {
+    background: linear-gradient(90deg,var(--foreground-color),var(--foreground-color-opacity-50)),var(--match-background-image);
+    background-size: cover;
+    background-position: 50%;
+    padding: 1rem 5.5rem 1rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+}
+.card{
+    
+    height: 100px;
+	width: 100%;
+	padding-right: 10px;
+	background:  linear-gradient(to right, rgba(4, 147, 114, 1) , rgba(4, 147, 114, 0),#1b2733,#1b2733,#1b2733);
+    border-radius: 5px;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+    
+
+}
+.card:after {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    height: calc(100% - 1rem);
+}
+.card:after {
+    border-left: 0.15rem solid #5ee790;
+    border-top-right-radius: 0.15rem;
+    border-bottom-right-radius: 0.15rem;
+}
+.card-container{
+    display: flex;
+    flex-wrap: no-wrap;
+    align-items: flex-start;
+    margin-right: 150px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.match__portrait{
+    display: flex;
+    align-items: flex-start;
+    
+}
+.avatar{
+    position: relative;
+top: 0px;
+right: px;
+}
+.match__detail{
+    margin-top: 18px;   
+    margin-left: 150px;
+display: flex;
+flex-direction: column;
+}
+
+.match__result{
+    margin-top: 18px;
+    margin-left: 80px;
+}
+.match__row-stats{
+    margin-top: 18px;
+    
+}
+.tex{
+    background-image: linear-gradient(to left, #b9a7e8, #0dfce8f0);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.center{
+    display: flex;
+    align-items:flex-start;
+    
+}

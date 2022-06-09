@@ -1,0 +1,28 @@
+
+table{
+    margin-top: 70px;
+    border-spacing: 1em .5em;
+    padding: 0 1em 1em 0;
+    border: 1.3px solid black;
+    background: white;
+}
+td{
+    width: 1.5em;
+  height: 1.5em;
+  background: white;
+  text-align: center;
+  border: 1.3px black solid;
+  vertical-align: middle;}
+th{
+    border: 1.3px black solid;
+    width: 30.5em;
+    height: 1.5em;
+   
+}
+tr{
+    border: 5px solid black;
+}
+.ass{
+    margin-left: 700px;
+    margin-top: 50px;
+}

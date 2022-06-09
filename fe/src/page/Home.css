@@ -1,0 +1,124 @@
+.Container2 {
+    position: relative; 
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-right: 100px;
+}
+.da{
+  margin-top: 40px;
+  width: 1250%;
+  height: 100%;
+  background-image: url("https://wallpaperaccess.com/full/7046959.jpg");
+  
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.Container2::before {    
+      content: "";
+      background-image: url('https://wallpapercave.com/dwp1x/wp7282568.png');
+      background-size: cover ;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 1;
+}
+.Container1 {
+  background-color: #17202f;
+  display: grid;    
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 400px 1000px ;
+}
+header {
+  grid-column: span 12;
+
+}
+header::before{
+  content: "";
+  background-image: url('https://images7.alphacoders.com/121/thumbbig-1212912.webp');
+  background-size: cover ;
+  opacity: 1;
+}
+main {
+  background-color: #101823;
+  grid-column: span 10;
+  margin: 50px;
+  margin-left: 50px;
+}
+
+.ip{
+    border: 2px solid black;
+  border-radius: 4px;
+}
+.header1{
+   height: 200px; 
+   margin: 0;
+   width: 100%;
+
+   display: grid;
+    grid-template-columns: repeat(19, 1fr);
+  background-image: url(https://c4.wallpaperflare.com/wallpaper/486/247/805/valorant-sage-valorant-jett-valorant-raze-valorant-viper-valorant-hd-wallpaper-preview.jpg);
+  background-size: cover ;
+  
+ margin-bottom: 50px;
+  
+}
+div > div:nth-child(1) {
+  grid-column: 4 / span 2;
+}
+input{
+  width: 200px;
+  margin-bottom: 10px;
+}
+button{
+  min-height: 10px;
+  max-height: 50px;
+   margin-left: 2px;
+  background-color: #111827;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 0.75rem;
+  padding: .75rem 1.2rem;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+button:hover {
+  background-color: #4d525a;
+}
+a{
+  text-decoration: none;
+  color: rgb(12, 9, 9);
+}
+.con{
+  background-color: #17202f;
+}
+.login-container{
+  margin-top: 25px;
+}
